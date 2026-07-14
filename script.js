@@ -273,11 +273,19 @@
   }
 
   /* ----------------------------------------------------------
-     11. SMOOTH SCROLL ANCHORS
+     11. SMOOTH SCROLL ANCHORS & URL CLEANUP
      ---------------------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
-      const id = anchor.getAttribute('href').slice(1);
+      const href = anchor.getAttribute('href');
+      
+      // Prevent default hash behavior for empty links so '#' never gets added to URL
+      if (href === '#') {
+        e.preventDefault();
+        return;
+      }
+
+      const id = href.slice(1);
       const target = document.getElementById(id);
       if (!target) return;
       
@@ -288,6 +296,39 @@
       
       window.scrollTo({ top: top, behavior: 'smooth' });
     });
+  });
+
+  /* ----------------------------------------------------------
+     12. INITIAL LOAD: SCROLL TO HASH & CLEAN URL
+     ---------------------------------------------------------- */
+  window.addEventListener('DOMContentLoaded', function () {
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        // Scroll smoothly to section if page is loaded with hash link
+        setTimeout(function () {
+          const offset = 76; // Header height
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+          
+          // Remove the hash from the URL bar after scrolling
+          if (history.replaceState) {
+            history.replaceState(null, document.title, window.location.pathname + window.location.search);
+          }
+        }, 150);
+      } else {
+        // Remove invalid hash from URL bar
+        if (history.replaceState) {
+          history.replaceState(null, document.title, window.location.pathname + window.location.search);
+        }
+      }
+    } else if (window.location.href.endsWith('#')) {
+      // Remove trailing '#' from the URL bar if present
+      if (history.replaceState) {
+        history.replaceState(null, document.title, window.location.pathname + window.location.search);
+      }
+    }
   });
 
 })();

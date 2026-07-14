@@ -85,6 +85,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent; /* Disable default blue highlight on tap for Android */
 }
 
 html {
@@ -2088,10 +2089,17 @@ a.contact-card-value:hover {
     white-space: nowrap;
     padding: var(--space-3);
     -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;  /* Hide scrollbar in Edge/IE */
+    scrollbar-width: none;  /* Hide scrollbar in Firefox */
+  }
+
+  .expert-tabs-list::-webkit-scrollbar {
+    display: none; /* Hide scrollbar on Android/Chrome */
   }
   
   .expert-tab-btn {
     flex: 0 0 auto;
+    padding: 0.65rem 1.25rem; /* Larger touch targets */
   }
 
   .skills-showcase-grid {
@@ -2128,6 +2136,14 @@ a.contact-card-value:hover {
     --space-16: 2.75rem;
   }
 
+  /* GPU scroll performance optimization for Android browsers */
+  .glow-blur {
+    filter: blur(85px) !important;
+    animation: none !important;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+  }
+
   .container {
     padding: 0 var(--space-4);
   }
@@ -2160,11 +2176,28 @@ a.contact-card-value:hover {
   .nav-link {
     width: 100%;
     text-align: center;
-    padding: var(--space-3) 0;
+    padding: var(--space-4) 0; /* Enhanced touch target size (>= 48px height) */
+  }
+
+  /* Enhanced touch targets for action controls */
+  .theme-toggle,
+  .nav-toggle {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav-toggle {
     display: flex;
+    padding: 0;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .nav-toggle .bar {
+    width: 20px;
   }
 
   .nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
@@ -2187,6 +2220,10 @@ a.contact-card-value:hover {
     display: none;
   }
   
+  .diu-profile-card {
+    height: 380px; /* Scaled down slightly on small screens to prevent viewport overflow */
+  }
+
   .expert-panels-content {
     padding: var(--space-4);
   }
@@ -2201,6 +2238,14 @@ a.contact-card-value:hover {
   
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Larger touch targets for mobile socials */
+  .contact-socials-list a,
+  .footer-socials-row a {
+    width: 46px;
+    height: 46px;
+    font-size: 1.15rem;
   }
   
   .form-row-grid {
@@ -2226,6 +2271,8 @@ a.contact-card-value:hover {
   }
   
   .scroll-top-btn {
+    width: 48px;
+    height: 48px;
     bottom: var(--space-4);
     right: var(--space-4);
   }
