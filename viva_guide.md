@@ -1,6 +1,6 @@
-# Ultimate Portfolio Project Viva & Presentation Guide
+# Ultimate Portfolio Project Viva & Presentation Guide (Toukir Ahmed Sagor)
 
-This guide is designed to help you ace your university project defense. It contains highly detailed, well-organized technical explanations of your portfolio's codebase. Your teacher (ma'am/sir) will be deeply impressed by these professional-level explanations.
+This guide is designed to help you ace your university project defense. It contains highly detailed, well-organized technical explanations of your portfolio's codebase and your featured group project. Your teachers will be deeply impressed by these professional-level explanations.
 
 ---
 
@@ -9,23 +9,20 @@ This guide is designed to help you ace your university project defense. It conta
 Here is how the project files are structured and why they are organized this way:
 
 ```text
-morsad-portfolio/
-├── D: (Working Directory)
-│   ├── index.html                  # Main structural HTML5 file
-│   ├── style.css                   # Custom global stylesheet (CSS3 variables, layouts, animations)
-│   ├── script.js                   # Application interactivity logic (Vanilla JS / ES6+)
-│   ├── package.json                # Project dependencies (Vite developer setup)
-│   ├── package-lock.json           # Exact dependency lockfile for reproducible builds
-│   ├── vite.config.js              # Optional bundler configurations
-│   ├── public/                     # Static assets directory
-│   │   ├── vite.svg                # Developer environment icon
-│   │   └── image/                  # Contains all project assets and images
-│   │       ├── profile.jpg         # Main developer photo
-│   │       ├── 1234.jpeg           # DIU student card profile photo
-│   │       ├── techmisify.png      # Techmisify AI agency logo
-│   │       └── ...                 # Other project screenshots and certificate assets
+toukir-portfolio/
+├── index.html                  # Main structural HTML5 file (Toukir's details & project showcase)
+├── style.css                   # Custom global stylesheet (CSS3 variables, layouts, animations)
+├── script.js                   # Application interactivity logic (Vanilla JS / ES6+)
+├── package.json                # Project dependencies (Vite developer setup)
+├── package-lock.json           # Exact dependency lockfile for reproducible builds
+├── public/                     # Static assets directory served directly from the root path
+│   ├── vite.svg                # Developer environment icon
+│   └── image/                  # Contains all project assets and images
+│       ├── Nimu Photo.jpeg     # Hero profile photo
+│       ├── Main photo 2.jpeg   # About profile photo
+│       └── HMS.jpg             # Healthcare Management System dashboard preview
 ```
-- **Why `/public`?** Vite serves files in the `public` folder directly from the root path `/`. An asset located at `public/image/profile.jpg` is linked in the HTML as `<img src="image/profile.jpg">` without needing relative directory jumps (e.g. `../public/image/...`).
+- **Why `/public`?** Vite serves files in the `public` folder directly from the root path `/`. An asset located at `public/image/10ViR.jpeg` is linked in the HTML as `<img src="image/10ViR.jpeg">` without needing relative directory jumps (e.g. `../public/image/...`).
 
 ---
 
@@ -35,19 +32,19 @@ morsad-portfolio/
 - **A:** The metadata configuring the page handles browser instructions, responsive scales, and SEO:
   - `<meta charset="UTF-8">`: Declares the document character encoding as UTF-8 (covers almost all written characters in the world).
   - `<meta name="viewport" content="width=device-width, initial-scale=1.0">`: Critical for responsive web design. It sets the width of the page to follow the screen-width of the device, and sets the initial zoom level to 100%.
-  - `<meta name="description">` & `<meta name="keywords">`: Provide snippets for search engine spiders (Google, Bing) to index the website correctly.
+  - `<meta name="description">` & `<meta name="keywords">`: Provide snippets for search engine indexing, tailored for Toukir's profile as a software engineering student.
 
 ### **Q: Walk me through the Semantic layout of the `<body>`.**
 - **A:** The body is structured into 3 main semantic components:
   1. `<header class="nav-header">`: Contains the sticky navigation links and theme switches.
   2. `<main>`: Contains the main unique content, split into `<section>` tags:
-     - `#hero`: Welcome introduction.
-     - `#about`: Personal details, DIU profile image, and Techmisify highlight banner.
-     - `#expert`: Interactive tab system (Skills, Experience, Education, Awards, Documents).
+     - `#hero`: Welcome introduction featuring Toukir's title and profile avatar.
+     - `#about`: Personal details, DIU profile image, and core developer competencies.
+     - `#expert`: Interactive tab system (Skills, Experience, Education, Extra Activities, Documents).
      - `#projects`: Filterable cards showcasing development projects.
      - `#services`: Flex-based service items.
      - `#contact`: Direct email/phone cards and contact form.
-  3. `<footer class="footer">`: Contains copyright indicators and legal disclosures.
+  3. `<footer class="footer">`: Contains copyright indicators and quick links.
 
 ---
 
@@ -77,31 +74,6 @@ morsad-portfolio/
   }
   ```
 
-### **Q: What is the benefit of using CSS Grid for the Header layout?**
-- **A:** The desktop navigation bar uses a 3-column CSS Grid:
-  ```css
-  .nav-container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-  }
-  ```
-  - **Column 1 (`1fr`)**: The logo is placed here, aligned to the absolute left (`justify-self: start`).
-  - **Column 2 (`auto`)**: The navigation links occupy the center, taking up only as much space as they need.
-  - **Column 3 (`1fr`)**: The action buttons (theme toggle) occupy the right, aligned to the absolute right (`justify-self: end`).
-  - **Benefit**: Because Column 1 and Column 3 are exactly equal (`1fr`), the center column (`auto`) is **pixel-perfectly centered** in the viewport, regardless of whether the logo is wider than the action buttons.
-
-### **Q: How does the "Frosted Glass" effect (Glassmorphism) work?**
-- **A:** It is styled on the header and floating cards using:
-  ```css
-  background: var(--bg-glass); /* rgba color with opacity (e.g. 0.75) */
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--border-color);
-  ```
-  - `backdrop-filter: blur(20px)` tells the browser's graphics engine to apply a Gaussian blur to elements positioned *underneath* this card.
-  - `saturate(180%)` keeps colors underneath vivid so they don't wash out.
-  - The transparent border creates an edge-reflection effect.
-
 ### **Q: Explain how the layout responds to different screen sizes.**
 - **A:** We use **Media Queries (`@media`)** to fluidly shift layouts:
   1. **Tablets (≤ 900px)**: 
@@ -112,27 +84,14 @@ morsad-portfolio/
      - The navigation links wrap into an absolute-positioned drawer menu that transitions downwards (`transform: translateY(0)`) when opened.
      - Spacing scales (`--space-24`) reduce via CSS variables to fit phone screens.
 
-### **Q: Why did you animate with `transform` and `opacity` instead of `top` or `width`?**
-- **A:** For **performance rendering**.
-  - Changing properties like `width`, `height`, `top`, or `margin` triggers a **Layout/Reflow** and **Paint** process in the browser, which is CPU-heavy and causes lagging/stuttering.
-  - Animating `transform: translateY(...)` and `opacity` bypasses these steps and works directly on the **Compositing** phase of the browser rendering pipeline, running directly on the device **GPU** for hardware-accelerated, 60fps animations.
-
 ---
 
 ## 4. JavaScript Logical Architecture (`script.js`)
 
-### **Q: Why is the theme checked *immediately* in the script?**
-- **A:** In `script.js`, the theme is read from storage and applied directly to the document root:
-  ```javascript
-  const currentTheme = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', currentTheme);
-  ```
-  - **Why:** This script is loaded synchronously in the `<head>` or at the start of `<body>` to set the theme variable *before* the browser paints the layout. If we waited for the page to load, visitors would experience a distracting "flash of white screen" (for dark mode users) before the theme switched.
-
 ### **Q: How does the category filter on projects function?**
 - **A:**
   1. We bind click event listeners to the filter buttons.
-  2. Clicking a button reads the filter query (`all`, `web`, `flutter`, `startup`).
+  2. Clicking a button reads the filter query (`all`, `c`, `java`).
   3. It loops through all project cards (`.project-card`). If the card's `data-category` matches the filter (or the filter is `all`), it removes the `.hidden` class.
   4. It then sets `opacity: 0` and triggers a `setTimeout` to fade the card back in with a slight vertical slide:
      ```javascript
@@ -154,21 +113,33 @@ morsad-portfolio/
 
 ---
 
-## 5. Contact Form Security & Verification
+## 5. Featured Project Deep-Dive: Healthcare Management System (C Language)
 
-### **Q: How does your form verification logic operate?**
-- **A:** 
-  1. Captures the submit event and prevents the default HTTP page refresh using `e.preventDefault()`.
-  2. Validates that all fields have inputs (trimmed of empty space).
-  3. Uses a **Regular Expression (Regex)** pattern to validate the email format:
-     ```javascript
-     /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-     ```
-     - `^`: Matches the start of the string.
-     - `[^\s@]+`: One or more characters that are not spaces or `@`.
-     - `@`: Matches the `@` symbol.
-     - `[^\s@]+`: Matches the domain name.
-     - `\.`: Matches the dot symbol.
-     - `[^\s@]+`: Matches the top-level domain (e.g. com, org).
-     - `$`: Matches the end of the string.
-  4. Simulates a loading state by disabling the submit button and changing the text to "SENDING..." during a 1.5-second timeout, then clears the inputs and shows a success indicator.
+If the teachers ask about your primary C project, here is how to explain it:
+
+### **Q: What is the core functionality of this project?**
+- **A:** It is a terminal-based system designed to manage hospital workflows. It handles three primary segments:
+  1. **Patient Admissions & Records**: Storing patient details, age, symptoms, and allocated ward/bed numbers.
+  2. **Doctor Appointments & Schedule**: Matching patient cases to doctor availability slots.
+  3. **Billing System**: Calculating checkup charges and generating text-based invoices.
+
+### **Q: How does the system store data without a database?**
+- **A:** It uses **C File Handling** (`stdio.h` file structure operations) for persistent storage. Data is stored in plain text files (e.g., `patients.txt`, `doctors.txt`).
+  - When the program starts, it reads records into memory using `fopen()` with mode `"r"`, `fscanf()`, or `fgets()`.
+  - When records are modified or added, it writes them back to the disk using `fopen()` with modes `"w"` or `"a"`, and `fprintf()`.
+  - This ensures that patient and appointment data is not lost when the program terminates.
+
+### **Q: What data structures are used in the code?**
+- **A:**
+  - **`struct` (Structures)**: Used to bundle related properties under a single user-defined datatype. For example:
+    ```c
+    typedef struct {
+        int id;
+        char name[50];
+        int age;
+        char disease[50];
+        int doctor_id;
+    } Patient;
+    ```
+  - **Arrays of Structures**: Used to hold multiple patient or doctor records in memory while running queries and sorting actions.
+  - **Pointers**: Passed to functions to edit data models directly (Call-by-Reference) rather than copying structures in memory (Call-by-Value), optimizing performance.
