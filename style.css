@@ -215,6 +215,42 @@ button {
   margin-bottom: var(--space-16);
 }
 
+.global-notice-banner {
+  background: rgba(239, 68, 68, 0.2);
+  border-bottom: 2px solid #ef4444;
+  color: #f87171;
+  text-align: center;
+  padding: 0.85rem var(--space-4);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-3);
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+  animation: notice-pulse 2s infinite alternate ease-in-out;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: top var(--transition-normal);
+}
+
+@keyframes notice-pulse {
+  0% {
+    background: rgba(239, 68, 68, 0.15);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);
+  }
+  100% {
+    background: rgba(239, 68, 68, 0.35);
+    box-shadow: 0 4px 30px rgba(239, 68, 68, 0.45);
+  }
+}
+
 .section-label {
   display: inline-block;
   font-family: var(--font-heading);
@@ -743,11 +779,6 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
-}
-
-.diu-profile-card:hover .diu-profile-img {
-  transform: scale(1.03);
 }
 
 .diu-badge-top {

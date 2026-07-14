@@ -272,6 +272,15 @@
     feedback.className = 'form-status-message' + (type ? ' ' + type : '');
   }
 
+  // Helper to calculate dynamic scroll offset based on header and notice banner height
+  function getScrollOffset() {
+    const isMobile = window.innerWidth <= 600;
+    const headerHeight = isMobile ? 68 : 76;
+    const noticeBanner = document.querySelector('.global-notice-banner');
+    const noticeHeight = noticeBanner ? noticeBanner.offsetHeight : 0;
+    return headerHeight + noticeHeight;
+  }
+
   /* ----------------------------------------------------------
      11. SMOOTH SCROLL ANCHORS & URL CLEANUP
      ---------------------------------------------------------- */
@@ -291,7 +300,7 @@
       
       e.preventDefault();
       
-      const offset = 76; // Header height
+      const offset = getScrollOffset();
       const top = target.getBoundingClientRect().top + window.scrollY - offset;
       
       window.scrollTo({ top: top, behavior: 'smooth' });
@@ -308,7 +317,7 @@
       if (target) {
         // Scroll smoothly to section if page is loaded with hash link
         setTimeout(function () {
-          const offset = 76; // Header height
+          const offset = getScrollOffset();
           const top = target.getBoundingClientRect().top + window.scrollY - offset;
           window.scrollTo({ top: top, behavior: 'smooth' });
           
