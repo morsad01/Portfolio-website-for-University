@@ -272,13 +272,11 @@
     feedback.className = 'form-status-message' + (type ? ' ' + type : '');
   }
 
-  // Helper to calculate dynamic scroll offset based on header and notice banner height
+  // Helper to calculate dynamic scroll offset based on header height
   function getScrollOffset() {
     const isMobile = window.innerWidth <= 600;
     const headerHeight = isMobile ? 68 : 76;
-    const noticeBanner = document.querySelector('.global-notice-banner');
-    const noticeHeight = noticeBanner ? noticeBanner.offsetHeight : 0;
-    return headerHeight + noticeHeight;
+    return headerHeight;
   }
 
   /* ----------------------------------------------------------

@@ -18,7 +18,7 @@ toukir-portfolio/
 ├── public/                     # Static assets directory served directly from the root path
 │   ├── vite.svg                # Developer environment icon
 │   └── image/                  # Contains all project assets and images
-│       ├── Nimu Photo.jpeg     # Hero profile photo
+│       ├── first photo.jpeg    # Hero profile photo
 │       ├── Main photo 2.jpeg   # About profile photo
 │       └── HMS.jpg             # Healthcare Management System dashboard preview
 ```
